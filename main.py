@@ -5,4 +5,5 @@ def read_file(filename):
         first_line_list = [int(x) for x in first_line.split(',')]
         return (first_line_list, second_line)
 
-print(read_file('sample01.txt')) 
+capacities, target = read_file('sample01.txt')
+print(capacities, target) 
