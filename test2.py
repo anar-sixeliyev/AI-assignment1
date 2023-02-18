@@ -1,8 +1,9 @@
-import numpy as np
+# import numpy as np
 from heapq import heappush, heappop
 
 def heuristic_(current_state, target):
-    return np.abs(np.sum(current_state) - target)
+    return abs(sum(current_state)-target)
+    # return np.abs(np.sum(current_state) - target)
 
 def shortest_path(capacities, target):
     heap = [(0 + abs(0 - target), 0, 0, [0] * len(capacities))]  # (steps + heuristic, steps, amount, jugs)
@@ -25,10 +26,10 @@ def shortest_path(capacities, target):
                 new_jugs = jugs[:]
                 print("new jugs before: ",new_jugs[i], new_jugs[j])
                 new_jugs[i] = cap# - new_jugs[i]
-                # new_jugs[j] = min((new_jugs[j] + amount), target)
+                new_jugs[j] = min((new_jugs[j] + amount), target)
                 print("new jugs after: ",new_jugs[i], new_jugs[j], target)
 
-                heappush(heap, (steps + 1 + heuristic_(new_jugs, target), steps + 1, new_jugs[i], new_jugs))
+                heappush(heap, (steps + 1 + heuristic_(new_jugs, target), steps + 1, new_jugs[j], new_jugs))
 
                 new_jugs = jugs[:]
                 # print("new jugs before: ",new_jugs[i], new_jugs[j])
