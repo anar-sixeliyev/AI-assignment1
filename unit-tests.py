@@ -5,8 +5,10 @@ from heapq import heappush, heappop
 
 class TestHeuristic(unittest.TestCase):
 
+    # returns a value less than or equal to the 
+    # actual cost of the optimal solution from the current state to the goal state
     def test_admissible(self):
-        jugs = [0, 0, 0]
+        jugs = [1, 2, 3]
         target = 8
         self.assertLessEqual(heuristic(jugs, target), 8)
 
@@ -53,6 +55,9 @@ class TestHeuristic(unittest.TestCase):
                             new_jug[j] -= pour_amount
 
                     h = heuristic(new_jug, target)
+                    # estimated cost to reach the goal from a current state 
+                    # is not greater than the cost of reaching that current state plus the
+                    # estimated cost to reach the goal from that current state
                     self.assertLessEqual(steps + h, heuristic(jugs, target) + 1)
                     
                     if tuple(new_jug) not in passed:

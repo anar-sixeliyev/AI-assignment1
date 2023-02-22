@@ -37,7 +37,7 @@ def AStarAlgorithm(capacities,target):
         
         # check if the last jug contains more water than the target amount
         elif jugs[-1] > target:
-            return -1
+            return -1, []
 
         # tuple representing the current state of the jugs to the passed set, indicating that this state has been visited during the search
         if (tuple(jugs)) in passed:
@@ -67,7 +67,7 @@ def AStarAlgorithm(capacities,target):
                 if tuple(new_jug) not in passed:
                     # print(steps, "jugs state : ", new_jug)
                     heappush(heap, (steps+heuristic(new_jug,target), steps+1, new_jug))
-    return -1
+    return -1, []
 
 
 def processFile():
@@ -79,6 +79,5 @@ def processFile():
     steps, path = AStarAlgorithm(capacities, target)
     print("Path:", path)
     print("Steps:", steps)
-
 
 processFile()
